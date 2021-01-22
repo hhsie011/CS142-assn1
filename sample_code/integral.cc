@@ -9,8 +9,10 @@ int main() {
     int segs = 10^8;
     long double sum = 0;
     timer t;
-    cilk_for (int i = 0; i < segs; i++) {
-        sum += (sin(1 + i / segs) * log(1 + i / segs) + sin(1 + (i + 1) / segs) * log(1 + (i + 1) / segs) / segs / 2);
+    for (int l = 0; l < 10000; l++) {
+        for (int i = (long)l * segs / 10000; i < (long)(l + 1) * segs / 10000; i++) {
+            sum += (sin(1 + i / segs) * log(1 + i / segs) + sin(1 + (i + 1) / segs) * log(1 + (i + 1) / segs)) / segs / 2;
+        }
     }
     t.stop();
     std::cout << "sum: " << sum << std::endl;
