@@ -10,7 +10,7 @@ int main() {
     long double sum = 0;
     timer t;
     for (int l = 0; l < 10000; l++) {
-        for (int i = (long)l * segs / 10000; i < (long)(l + 1) * segs / 10000; i++) {
+        cilk_for (int i = (long)l * segs / 10000; i < (long)(l + 1) * segs / 10000; i++) {
             sum += (sin(1 + i / segs) * log(1 + i / segs) + sin(1 + (i + 1) / segs) * log(1 + (i + 1) / segs)) / segs / 2;
         }
     }
